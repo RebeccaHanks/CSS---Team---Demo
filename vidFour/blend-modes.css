@@ -1,0 +1,279 @@
+:root {
+  --bg: #f8fafc;
+  --card: #ffffff;
+  --text: #0f172a;
+  --muted: #64748b;
+  --blue: #2563eb;
+  --green: #059669;
+  --purple: #7c3aed;
+  --orange: #ea580c;
+  --shadow: 0 10px 30px rgb(15 23 42 / 0.08);
+  --radius: 16px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+header {
+  background: linear-gradient(135deg, #dbeafe, #ede9fe);
+  padding: 4rem 1.5rem;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 4rem);
+}
+
+header p {
+  max-width: 700px;
+  margin: 1rem auto 0;
+  color: var(--muted);
+  font-size: 1.1rem;
+}
+
+main {
+  width: min(1100px, 92%);
+  margin: 2rem auto 5rem;
+}
+
+.card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow);
+}
+
+h2 {
+  margin-top: 0;
+  color: var(--blue);
+}
+
+code {
+  background: #e2e8f0;
+  padding: 0.15rem 0.4rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+}
+
+pre {
+  background: #0f172a;
+  color: #f8fafc;
+  padding: 1rem;
+  overflow-x: auto;
+  border-radius: 12px;
+}
+
+.comparison {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.bad {
+  border-top: 6px solid var(--orange);
+}
+
+.good {
+  border-top: 6px solid var(--green);
+}
+
+.label {
+  font-weight: bold;
+  margin-bottom: 1rem;
+  display: inline-block;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.feature {
+  background: #f1f5f9;
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+.live-demo {
+  background: #ede9fe;
+  border-left: 6px solid var(--purple);
+  padding: 1rem;
+  border-radius: 12px;
+}
+
+footer {
+  text-align: center;
+  color: var(--muted);
+  padding: 2rem 1rem;
+}
+
+/* ----------------------------------
+   Blend Mode Family Samples
+---------------------------------- */
+
+    .blend-sample {
+      min-height: 120px;
+      margin: 1rem 0;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      color: white;
+      font-weight: bold;
+      font-size: 1.2rem;
+      background:
+        linear-gradient(135deg, #2563eb, #f97316),
+        url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80") center / cover;
+    }
+
+    .multiply {
+      background-blend-mode: multiply;
+    }
+
+    .screen {
+      background-blend-mode: screen;
+      color: #0f172a;
+    }
+
+    .overlay {
+      background-blend-mode: overlay;
+    }
+
+    .color {
+      background-blend-mode: color;
+    }
+
+/* ----------------------------------
+   Hero background-blend-mode Examples
+---------------------------------- */
+
+.hero {
+  min-height: 280px;
+  border-radius: var(--radius);
+  display: grid;
+  place-items: center;
+  text-align: center;
+  color: white;
+  padding: 2rem;
+  margin: 1.5rem 0;
+  overflow: hidden;
+}
+
+.hero h3 {
+  font-size: clamp(2rem, 5vw, 4rem);
+  margin: 0;
+  color: white;
+  text-shadow: 0 4px 20px rgb(0 0 0 / 0.6);
+}
+
+/* Color wash over a photo */
+.color-wash {
+  background-image:
+    linear-gradient(#2563eb, #2563eb),
+    url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1400&auto=format&fit=crop");
+
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: multiply;
+}
+
+/* Gradient duotone: warm to cool across the image */
+.gradient-duotone {
+  background:
+    linear-gradient(
+      to right,
+      oklch(0.5 0.2 30),
+      oklch(0.4 0.2 280)
+    ),
+
+    url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1400&auto=format&fit=crop")
+    center / cover;
+
+  background-blend-mode: overlay;
+}
+
+/* ----------------------------------
+   mix-blend-mode Example
+---------------------------------- */
+
+.mix-demo {
+  min-height: 260px;
+  border-radius: var(--radius);
+  display: grid;
+  place-items: center;
+  background:
+    linear-gradient(135deg, #020617, #2563eb, #f97316),
+    url("https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1200&q=80") center / cover;
+  background-blend-mode: multiply;
+}
+
+.overlay-text {
+  mix-blend-mode: screen;
+  color: oklch(0.9 0 0);
+  font-size: clamp(2.5rem, 8vw, 6rem);
+  font-weight: bold;
+}
+
+/* ----------------------------------
+   Text Legibility Example
+---------------------------------- */
+
+.risky-text-demo {
+  background:
+    linear-gradient(90deg, #ffffff, #020617),
+    url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80") center / cover;
+  background-blend-mode: overlay;
+}
+
+.blended-warning {
+  color: white;
+  mix-blend-mode: difference;
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+.safe-text-demo {
+  background: #0f172a;
+  color: white;
+}
+
+/* ----------------------------------
+   Isolation Demo
+---------------------------------- */
+
+.colorful-page-bg {
+  background: linear-gradient(135deg, #f97316, #7c3aed, #2563eb);
+  padding: 1.5rem;
+  border-radius: var(--radius);
+}
+
+.no-isolation-card {
+  position: relative;
+}
+
+.isolation-card {
+  position: relative;
+  isolation: isolate;
+}
+
+.overlay-box {
+  background: #facc15;
+  color: #0f172a;
+  padding: 2rem;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 1.4rem;
+  text-align: center;
+  mix-blend-mode: multiply;
+}

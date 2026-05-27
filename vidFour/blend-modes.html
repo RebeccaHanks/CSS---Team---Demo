@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>CSS Blend Modes Demo Page</title>
+
+  <link rel="stylesheet" href="blend-modes.css" />
+</head>
+
+<body>
+
+  <header>
+    <h1>CSS Blend Modes Demo Page</h1>
+
+    <p>
+      Demo for understanding background-blend-mode,
+      mix-blend-mode, blend mode families, text readability, and isolation.
+    </p>
+  </header>
+
+  <main>
+
+    <section class="card">
+      <h2>1. What Are Blend Modes?</h2>
+
+      <p>
+        Blend modes control how two layers of color mix together.
+        Instead of one layer simply covering another, the browser combines
+        their colors to create effects like darkening, lightening, contrast,
+        or color changes.
+      </p>
+
+      <div class="live-demo">
+        <strong>Simple idea:</strong>
+        Blend modes mix a top layer with a bottom layer.
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>2. The Two CSS Blend Properties</h2>
+
+      <div class="comparison">
+        <div class="good card">
+          <span class="label">background-blend-mode</span>
+
+          <p>
+            Blends an element’s own background layers together.
+            This is usually safer and easier to control.
+          </p>
+
+<pre>.hero {
+  background:
+    blue,
+    url('/images/hero.jpg') center / cover;
+  background-blend-mode: multiply;
+}</pre>
+        </div>
+
+        <div class="bad card">
+          <span class="label">mix-blend-mode</span>
+
+          <p>
+            Blends the whole element with whatever is behind it on the page.
+            This is powerful, but less predictable.
+          </p>
+
+<pre>.overlay-text {
+  mix-blend-mode: screen;
+}</pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>3. Blend Mode Families</h2>
+
+      <p>
+        You do not need to memorize every blend mode formula.
+        Instead, learn the main groups.
+      </p>
+
+      <div class="feature-grid">
+        <div class="feature">
+          <h3>Darken</h3>
+          <code>multiply</code>
+          <div class="blend-sample multiply">multiply</div>
+          <p>Makes colors darker. White tends to disappear.</p>
+        </div>
+
+        <div class="feature">
+          <h3>Lighten</h3>
+          <code>screen</code>
+          <div class="blend-sample screen">screen</div>
+          <p>Makes colors lighter. Black tends to disappear.</p>
+        </div>
+
+        <div class="feature">
+          <h3>Contrast</h3>
+          <code>overlay</code>
+          <div class="blend-sample overlay">overlay</div>
+          <p>Adds contrast by mixing darkening and lightening.</p>
+        </div>
+
+        <div class="feature">
+          <h3>Component</h3>
+          <code>color</code>
+          <div class="blend-sample color">color</div>
+          <p>Changes color while keeping some original image detail.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>4. background-blend-mode: Color Wash</h2>
+
+      <p>
+        This example places a solid color over a photo and blends them together.
+        The image becomes darker and tinted.
+      </p>
+
+      <div class="hero color-wash">
+        <h3>Color Wash Over a Photo</h3>
+      </div>
+
+<pre>/* Color wash over a photo */
+.hero {
+    background:
+        oklch(0.45 0.2 260),
+        url('/images/hero.jpg') center / cover;
+    background-blend-mode: multiply;
+
+    /* background-position: center; */
+    /* background-size: cover; */
+}</pre>
+    </section>
+
+    <section class="card">
+      <h2>5. background-blend-mode: Gradient Duotone</h2>
+
+      <p>
+        This example blends a warm-to-cool gradient over a photo.
+        It creates a duotone effect without editing the image in Photoshop.
+      </p>
+
+      <div class="hero gradient-duotone">
+        <h3>Gradient Duotone Effect</h3>
+      </div>
+
+<pre>/* Gradient duotone: warm to cool across the image */
+.hero {
+    background:
+        linear-gradient(to right, oklch(0.5 0.2 30), oklch(0.4 0.2 280)),
+        url('/images/hero.jpg') center / cover;
+    background-blend-mode: overlay;
+}</pre>
+    </section>
+
+    <section class="card">
+      <h2>6. mix-blend-mode</h2>
+
+      <p>
+        mix-blend-mode blends the whole element with whatever is behind it.
+        This example uses text that blends with the background.
+      </p>
+
+      <div class="mix-demo">
+        <span class="overlay-text">Blended Text</span>
+      </div>
+
+<pre>.overlay-text { mix-blend-mode: screen; color: oklch(0.9 0 0); }</pre>
+    </section>
+
+    <section class="card">
+      <h2>7. Text Legibility Warning</h2>
+
+      <p>
+        Blend modes on text can be risky because the text changes depending
+        on the background behind it. It may be readable in one place and
+        unreadable in another.
+      </p>
+
+      <div class="comparison">
+        <div class="bad card risky-text-demo">
+          <span class="label">❌ Risky</span>
+          <p class="blended-warning">This blended text may disappear.</p>
+        </div>
+
+        <div class="good card safe-text-demo">
+          <span class="label">✅ Safer</span>
+          <p>This text sits on a predictable background.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>8. Isolation: Controlling the Blend Scope</h2>
+
+      <p>
+        Without isolation, a blended element can interact with things outside
+        its card. With isolation, the blending stays inside the card.
+      </p>
+
+      <div class="comparison colorful-page-bg">
+        <div class="bad card no-isolation-card">
+          <span class="label">❌ Without Isolation</span>
+          <div class="overlay-box">Blends too far</div>
+        </div>
+
+        <div class="good card isolation-card">
+          <span class="label">✅ With Isolation</span>
+          <div class="overlay-box">Stays contained</div>
+        </div>
+      </div>
+
+<pre>/* Without isolation: blend leaks through to the page background */ .card { position: relative; } .card .overlay { mix-blend-mode: multiply; /* This blends with the card AND whatever is behind the card */ } /* With isolation: blend stays inside the card */ .card { isolation: isolate; } .card .overlay { mix-blend-mode: multiply; /* This only blends with content inside the card */ }</pre>
+
+      <div class="live-demo">
+        <strong>Rule of thumb:</strong>
+        When you use <code>mix-blend-mode</code>, usually add
+        <code>isolation: isolate</code> to the nearest parent container.
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>9. Final Teaching Checklist</h2>
+
+      <ol>
+        <li>Explain that blend modes mix two layers of color.</li>
+        <li>Show the difference between <code>background-blend-mode</code> and <code>mix-blend-mode</code>.</li>
+        <li>Demonstrate darken, lighten, contrast, and component blend families.</li>
+        <li>Show a hero image with a color overlay.</li>
+        <li>Show a hero image with a gradient overlay.</li>
+        <li>Warn that blended text can fail accessibility contrast.</li>
+        <li>Show why <code>isolation: isolate</code> keeps blending under control.</li>
+      </ol>
+    </section>
+
+  </main>
+
+  <footer>
+    Built for a WDD 331R CSS Blend Modes teaching demo.
+  </footer>
+
+</body>
+</html>

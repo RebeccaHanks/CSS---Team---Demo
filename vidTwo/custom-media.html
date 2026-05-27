@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>@custom-media Teaching Demo</title>
+
+  <link rel="stylesheet" href="custom-media.css" />
+</head>
+
+<body>
+
+  <header>
+    <h1>@custom-media Demo Page</h1>
+
+    <p>
+      A live teaching demo for explaining repeated breakpoints,
+      named media queries, polyfills, and build tooling.
+    </p>
+  </header>
+
+  <main>
+
+    <!-- Problem Section -->
+    <section class="card">
+      <h2>1. The Problem: Repeated Magic Numbers</h2>
+
+      <div class="comparison">
+
+        <div class="bad card">
+          <span class="label">❌ Hard-Coded Breakpoints</span>
+
+<pre>@media (min-width: 48em)
+@media (min-width: 48em)
+@media (min-width: 48em)
+@media (min-width: 64em)</pre>
+
+          <p>
+            The same values appear repeatedly across many files.
+            If the breakpoint changes, you must update everything manually.
+          </p>
+        </div>
+
+        <div class="good card">
+          <span class="label">✅ Named Breakpoints</span>
+
+<pre>@custom-media --medium (min-width: 48em);
+@custom-media --large (min-width: 64em);</pre>
+
+          <p>
+            Define the breakpoint once, then reuse it everywhere.
+            Easier to read and easier to maintain.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Syntax -->
+    <section class="card">
+      <h2>2. The Syntax</h2>
+
+      <div class="code-columns">
+
+        <div>
+          <h3>Define Aliases</h3>
+
+<pre>@custom-media --medium (min-width: 48em);
+@custom-media --large (min-width: 64em);
+@custom-media --motion (prefers-reduced-motion: no-preference);</pre>
+        </div>
+
+        <div>
+          <h3>Use Them</h3>
+
+<pre>@media (--medium) {
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}</pre>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Live Demo -->
+    <section class="card">
+      <h2>3. Live Responsive Demo</h2>
+
+      <p>Resize the browser window while teaching.</p>
+
+      <ul>
+        <li>Small screen → 1 column</li>
+        <li>Medium screen (48em) → 2 columns</li>
+        <li>Large screen (64em) → 4 columns</li>
+      </ul>
+
+      <div class="breakpoint-boxes">
+        <div class="box animated">Box 1</div>
+        <div class="box animated">Box 2</div>
+        <div class="box animated">Box 3</div>
+        <div class="box animated">Box 4</div>
+      </div>
+    </section>
+
+    <!-- Tokens -->
+    <section class="card">
+      <h2>4. Where @custom-media Belongs</h2>
+
+      <p>
+        In your architecture, custom media definitions belong in:
+      </p>
+
+<pre>tokens/breakpoints.css</pre>
+
+      <p>
+        Breakpoints are design tokens just like colors and spacing.
+      </p>
+
+<pre>@custom-media --small (min-width: 30em);
+@custom-media --medium (min-width: 48em);
+@custom-media --large (min-width: 64em);
+@custom-media --dark (prefers-color-scheme: dark);</pre>
+    </section>
+
+    <!-- Beyond Breakpoints -->
+    <section class="card">
+      <h2>5. Beyond Width Breakpoints</h2>
+
+      <div class="feature-grid">
+
+        <div class="feature">
+          <h3>Accessibility</h3>
+          <code>--motion</code><br />
+          <code>--high-contrast</code>
+        </div>
+
+        <div class="feature">
+          <h3>Theming</h3>
+          <code>--dark</code>
+        </div>
+
+        <div class="feature">
+          <h3>Input Types</h3>
+          <code>--touch</code><br />
+          <code>--mouse</code>
+        </div>
+
+        <div class="feature">
+          <h3>Orientation</h3>
+          <code>--landscape</code>
+        </div>
+
+      </div>
+
+      <div class="mouse-demo">
+
+      </div>
+    </section>
+
+    <!-- Browser Support -->
+    <section class="card">
+      <h2>6. Browser Support + Polyfills</h2>
+
+      <div class="comparison">
+
+        <div class="card bad">
+          <h3>Current Browser Support</h3>
+
+          <ul>
+            <li>Chrome ❌</li>
+            <li>Safari ❌</li>
+            <li>Firefox ⚠️ Behind a flag</li>
+          </ul>
+        </div>
+
+        <div class="card good">
+          <h3>Solution</h3>
+
+          <p>Use a build tool like:</p>
+
+          <ul>
+            <li>PostCSS</li>
+            <li>Lightning CSS</li>
+          </ul>
+
+          <p>
+            They polyfill <code>@custom-media</code>
+            into standard CSS.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Before After -->
+    <section class="card">
+      <h2>7. Before and After Build Example</h2>
+
+      <div class="code-columns">
+
+        <div>
+          <h3>Source CSS</h3>
+
+<pre>@custom-media --medium (min-width: 48em);
+
+@media (--medium) {
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}</pre>
+        </div>
+
+        <div>
+          <h3>Compiled Output</h3>
+
+<pre>@media (min-width: 48em) {
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}</pre>
+        </div>
+
+      </div>
+
+      <div class="live-demo">
+        <strong>Important Teaching Point:</strong>
+
+        The browser never sees
+        <code>@custom-media</code>.
+
+        The build tool converts it into regular CSS first.
+      </div>
+    </section>
+
+    <!-- Workflow -->
+    <section class="card">
+      <h2>8. Refactor Workflow</h2>
+
+      <ol>
+        <li>Create <code>tokens/breakpoints.css</code></li>
+        <li>Add <code>@custom-media</code> definitions</li>
+        <li>Import file into <code>main.css</code></li>
+        <li>Replace hard-coded breakpoints</li>
+        <li>Run your build tool</li>
+        <li>Verify everything still works</li>
+      </ol>
+
+      <p>
+        Then demonstrate changing one breakpoint value and explain
+        that the entire project updates automatically.
+      </p>
+    </section>
+
+  </main>
+
+  <footer>
+    Built for a WDD 331R @custom-media teaching demo.
+  </footer>
+
+</body>
+</html>

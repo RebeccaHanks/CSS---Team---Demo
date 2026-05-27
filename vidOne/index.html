@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CSS Pseudo-Elements Demo</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <h1>CSS Pseudo-Elements Demo</h1>
+    <p>Showing <strong>::marker</strong>, <strong>::backdrop</strong>, and <strong>::selection</strong>.</p>
+  </header>
+
+  <main>
+    <section class="card marker-demo">
+      <h2>::marker</h2>
+      <p>The <code>::marker</code> pseudo-element styles the bullet or number in a list.</p>
+
+      <h3>Custom Bullet List</h3>
+      <ul>
+        <li>The bullet is replaced with a star.</li>
+        <li>The marker color is blue.</li>
+        <li>The marker size is slightly larger.</li>
+      </ul>
+
+      <h3>Styled Numbered List</h3>
+      <ol>
+        <li>First, write the list normally in HTML.</li>
+        <li>Then, style the list numbers with CSS.</li>
+        <li>The real list behavior still works.</li>
+      </ol>
+    </section>
+
+    <section class="card backdrop-demo">
+      <h2>::backdrop</h2>
+      <p>The <code>::backdrop</code> pseudo-element styles the area behind a modal dialog.</p>
+
+      <button onclick="document.querySelector('#demo-dialog').showModal()">
+        Open Pop Up
+      </button>
+
+      <dialog id="demo-dialog">
+        <h3>Hello from the pop up!</h3>
+        <p>This dialog uses <code>::backdrop</code> to make the background dark and slightly blurry.</p>
+        <button onclick="document.querySelector('#demo-dialog').close()">
+          Close
+        </button>
+      </dialog>
+    </section>
+
+    <section class="card selection-demo">
+      <h2>::selection</h2>
+      <p>The <code>::selection</code> pseudo-element styles text when a user highlights it.</p>
+      <p class="highlight-text">
+        Try clicking and dragging over this sentence. The highlighted text should turn white with a purple background.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <p>Built for a CSS teaching demo.</p>
+  </footer>
+</body>
+</html>

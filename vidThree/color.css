@@ -1,0 +1,202 @@
+:root {
+  --background: #f8fafc;
+  --card: #ffffff;
+  --color-text: #1e293b;
+  --muted: #64748b;
+  --color-accent: #2563eb;
+  --shadow: 0 10px 25px rgb(15 23 42 / 0.08);
+  --radius-md: 10px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--background);
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+.site-header {
+  padding: 3rem 1.5rem;
+  text-align: center;
+  background: #dbeafe;
+}
+
+.site-header h1 {
+  margin: 0 0 0.5rem;
+  font-size: 2.2rem;
+}
+
+.site-header p {
+  margin: 0;
+  color: var(--muted);
+}
+
+main {
+  width: min(900px, 92%);
+  margin: 2rem auto;
+}
+
+.card {
+  background: var(--card);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+}
+
+h2 {
+  margin-top: 0;
+  color: var(--color-accent);
+}
+
+code {
+  background: #e2e8f0;
+  padding: 0.15rem 0.35rem;
+  border-radius: 5px;
+  font-family: monospace;
+}
+
+pre {
+  background: #0f172a;
+  color: #e2e8f0;
+  padding: 1rem;
+  border-radius: 10px;
+  overflow-x: auto;
+}
+pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+/* ----------------------------------
+   Basic currentColor demo
+---------------------------------- */
+.alert {
+  color: #dc2626;
+  border: 2px solid currentColor;
+  box-shadow: 0 2px 8px rgb(220 38 38 / 0.35);
+  background: #fef2f2;
+}
+
+/* ----------------------------------
+   Badge demo
+---------------------------------- */
+.badge-row {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin: 1rem 0;
+}
+
+.badge {
+  color: var(--color-accent);
+  border: 1px solid currentColor;
+  background: color-mix(in srgb, currentColor 12%, transparent);
+  padding: 0.2rem 0.8rem;
+  border-radius: 9999px;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.badge--success {
+  color: #16a34a;
+}
+
+.badge--warning {
+  color: #ca8a04;
+}
+
+.badge--danger {
+  color: #dc2626;
+}
+
+/* ----------------------------------
+   Button and SVG demo
+---------------------------------- */
+.btn {
+  color: var(--color-accent);
+  border: 1px solid currentColor;
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-size: 1rem;
+  transition: color 0.2s, background-color 0.2s;
+}
+
+.btn:hover {
+  color: #ffffff;
+  background-color: var(--color-accent);
+}
+
+/* ----------------------------------
+   Blockquote demo
+---------------------------------- */
+.pullquote {
+  color: var(--color-accent);
+  border-left: 4px solid currentColor;
+  box-shadow: -4px 0 12px currentColor;
+  padding: 1.2rem 1.6rem;
+  font-style: italic;
+  background: #eff6ff;
+  border-radius: var(--radius-md);
+}
+
+.pullquote p {
+  color: var(--color-text);
+  margin: 0;
+}
+
+/* ----------------------------------
+   Gotcha demo
+---------------------------------- */
+.box {
+  color: red;
+  border: 2px solid currentColor;
+  box-shadow: 0 0 5px currentColor;
+  color: black;
+  padding: 1rem;
+  border-radius: var(--radius-md);
+}
+
+/* ----------------------------------
+   currentColor in custom properties
+---------------------------------- */
+:root {
+  --border-tint: currentColor;
+}
+
+.two-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.header-demo {
+  color: navy;
+  border: 2px solid var(--border-tint);
+  padding: 1rem;
+  border-radius: var(--radius-md);
+}
+
+.footer-demo {
+  color: gray;
+  border: 2px solid var(--border-tint);
+  padding: 1rem;
+  border-radius: var(--radius-md);
+}
+
+footer {
+  text-align: center;
+  color: var(--muted);
+  padding: 2rem 1rem;
+}
