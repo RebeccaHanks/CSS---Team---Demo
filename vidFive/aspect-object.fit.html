@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Aspect Ratio and Object Fit Demo</title>
+
+  <link rel="stylesheet" href="aspect-object-fit.css" />
+</head>
+
+<body>
+
+  <header>
+    <h1>Aspect Ratio and Object Fit Demo</h1>
+
+    <p>
+      Demo for understanding aspect-ratio, object-fit, object-position,
+      card thumbnails, and responsive video boxes.
+    </p>
+  </header>
+
+  <main>
+
+    <section class="card">
+      <h2>1. The Main Problem</h2>
+
+      <p>
+        Images have their own natural shape. But grid and flex containers
+        can make boxes that are different shapes.
+      </p>
+
+      <div class="live-demo">
+        <strong>Problem:</strong>
+        If an image is forced into the wrong shape, it can stretch, crop,
+        or leave empty space.
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>2. Without the Right Properties</h2>
+
+      <p>
+        This image is forced into a box. It fills the space, but it gets
+        stretched and looks wrong.
+      </p>
+
+      <div class="comparison">
+        <div class="bad card small-card">
+          <span class="label">❌ Stretched Image</span>
+
+          <img
+            class="stretched-img"
+            src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80"
+            alt="Landscape"
+          >
+
+<pre>img {
+  width: 100%;
+  height: 220px;
+}</pre>
+        </div>
+
+        <div class="good card small-card">
+          <span class="label">✅ Better Image</span>
+
+          <img
+            class="better-img"
+            src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80"
+            alt="Landscape"
+          >
+
+<pre>img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}</pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>3. What aspect-ratio Does</h2>
+
+      <p>
+        <code>aspect-ratio</code> controls the shape of an element.
+        It can make something a square, widescreen, or any other ratio.
+      </p>
+
+      <div class="feature-grid">
+        <div class="feature">
+          <h3>Square</h3>
+          <div class="ratio-box square">1 / 1</div>
+<pre>aspect-ratio: 1 / 1;</pre>
+        </div>
+
+        <div class="feature">
+          <h3>Video Shape</h3>
+          <div class="ratio-box wide">16 / 9</div>
+<pre>aspect-ratio: 16 / 9;</pre>
+        </div>
+
+        <div class="feature">
+          <h3>Card Shape</h3>
+          <div class="ratio-box card-shape">4 / 3</div>
+<pre>aspect-ratio: 4 / 3;</pre>
+        </div>
+      </div>
+
+      <div class="live-demo">
+        <strong>Simple idea:</strong>
+        <code>aspect-ratio</code> controls the shape of the box.
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>4. object-fit Values</h2>
+
+      <p>
+        <code>object-fit</code> controls how the image fills the box.
+      </p>
+
+      <div class="feature-grid">
+        <div class="feature">
+          <h3>fill</h3>
+          <img class="fit-demo fill" src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80" alt="Landscape">
+          <p>Fills the box, but can stretch the image.</p>
+<pre>object-fit: fill;</pre>
+        </div>
+
+        <div class="feature">
+          <h3>cover</h3>
+          <img class="fit-demo cover" src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80" alt="Landscape">
+          <p>Fills the box and crops extra parts.</p>
+<pre>object-fit: cover;</pre>
+        </div>
+
+        <div class="feature">
+          <h3>contain</h3>
+          <img class="fit-demo contain" src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80" alt="Landscape">
+          <p>Shows the whole image but may leave space.</p>
+<pre>object-fit: contain;</pre>
+        </div>
+
+        <div class="feature">
+          <h3>none</h3>
+          <img class="fit-demo none" src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80" alt="Landscape">
+          <p>Keeps the image its original size.</p>
+<pre>object-fit: none;</pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>5. Best Pattern for Card Images</h2>
+
+      <p>
+        This is the pattern we will probably use the most for card thumbnails.
+      </p>
+
+<pre>.card img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}</pre>
+
+      <div class="thumbnail-grid">
+        <article class="demo-card">
+          <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80" alt="Landscape">
+          <h3>Named Grid Areas</h3>
+          <p>Readable layout names.</p>
+        </article>
+
+        <article class="demo-card">
+          <img src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?auto=format&fit=crop&w=900&q=80" alt="Forest">
+          <h3>Responsive Tracks</h3>
+          <p>auto-fit and minmax.</p>
+        </article>
+
+        <article class="demo-card">
+          <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=900&q=80" alt="Mountains">
+          <h3>Intrinsic Sizing</h3>
+          <p>Content-driven sizing.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>6. Video Boxes That Stay 16:9</h2>
+
+      <p>
+        A video or iframe should keep its shape when the screen changes size.
+        <code>aspect-ratio</code> makes this easy.
+      </p>
+
+      <div class="video-embed">
+        <iframe
+          src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+          title="Demo video"
+          allowfullscreen>
+        </iframe>
+      </div>
+
+<pre>.video-embed {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+}
+
+.video-embed iframe {
+  width: 100%;
+  height: 100%;
+}</pre>
+    </section>
+
+    <section class="card">
+      <h2>7. object-position</h2>
+
+      <p>
+        When <code>object-fit: cover</code> crops an image,
+        <code>object-position</code> chooses which part stays visible.
+      </p>
+
+      <div class="feature-grid">
+        <div class="feature">
+          <h3>Center</h3>
+          <img class="position-demo center" src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=900&q=80" alt="Portrait">
+<pre>object-position: center;</pre>
+        </div>
+
+        <div class="feature">
+          <h3>Top</h3>
+          <img class="position-demo top" src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=900&q=80" alt="Portrait">
+<pre>object-position: center top;</pre>
+        </div>
+
+        <div class="feature">
+          <h3>Bottom</h3>
+          <img class="position-demo bottom" src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=900&q=80" alt="Portrait">
+<pre>object-position: center bottom;</pre>
+        </div>
+      </div>
+
+      <div class="live-demo">
+        <strong>Tip:</strong>
+        Use <code>object-position: center top;</code> for people photos
+        so faces do not get cut off.
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>8. Final Teaching Checklist</h2>
+
+      <ol>
+        <li><code>aspect-ratio</code> controls the shape of the box.</li>
+        <li><code>object-fit</code> controls how the image fits inside the box.</li>
+        <li><code>cover</code> fills the box but may crop.</li>
+        <li><code>contain</code> shows the whole image but may leave space.</li>
+        <li><code>fill</code> can stretch and distort the image.</li>
+        <li><code>object-position</code> controls which part of the image stays visible.</li>
+        <li>The best card image pattern is usually <code>aspect-ratio</code> plus <code>object-fit: cover</code>.</li>
+      </ol>
+    </section>
+
+  </main>
+
+  <footer>
+    Built for a WDD 331R Aspect Ratio and Object Fit teaching demo.
+  </footer>
+
+</body>
+</html>
