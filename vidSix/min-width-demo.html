@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>min-width and box-sizing Demo</title>
+
+  <link rel="stylesheet" href="min-width-demo.css" />
+</head>
+
+<body>
+
+  <header>
+    <h1>min-width: 0 and box-sizing Demo</h1>
+    <p>
+      Demo for understanding flex overflow, min-height, grid overflow,
+      and why box-sizing matters.
+    </p>
+  </header>
+
+  <main>
+
+    <section class="card">
+      <h2>1. The Main Problem</h2>
+      <p>
+        Flex items have a default of <code>min-width: auto</code>.
+        This means long content can stop the item from shrinking.
+      </p>
+
+      <div class="live-demo">
+        <strong>Simple idea:</strong>
+        Sometimes the CSS looks right, but the browser is still protecting
+        the content from getting smaller.
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>2. Flex Layout Without min-width: 0</h2>
+
+      <p>
+        This layout looks normal, but the long filename pushes outside
+        the content area.
+      </p>
+
+      <div class="sidebar-layout broken">
+        <aside class="sidebar">Sidebar</aside>
+        <div class="content">
+          File uploaded:
+          /home/student/projects/wdd331r/practice-site/unit-4/advanced/container-demo.html
+        </div>
+      </div>
+
+<pre>.sidebar-layout {
+  display: flex;
+}
+
+.sidebar {
+  flex: 0 0 240px;
+}
+
+.content {
+  flex: 1;
+}</pre>
+    </section>
+
+    <section class="card">
+      <h2>3. Flex Layout With min-width: 0</h2>
+
+      <p>
+        Adding <code>min-width: 0</code> lets the content area shrink
+        and stay inside the layout.
+      </p>
+
+      <div class="sidebar-layout fixed">
+        <aside class="sidebar">Sidebar</aside>
+        <div class="content">
+          File uploaded:
+          /home/student/projects/wdd331r/practice-site/unit-4/advanced/container-demo.html
+        </div>
+      </div>
+
+<pre>.content {
+  flex: 1;
+  min-width: 0;
+}</pre>
+
+      <div class="live-demo">
+        <strong>Important:</strong>
+        <code>min-width: 0</code> allows shrinking. Then you can choose
+        if the text wraps, gets hidden, or uses ellipsis.
+      </div>
+
+<pre>.content {
+  overflow: hidden;
+}</pre>
+
+<pre>.content {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}</pre>
+    </section>
+
+    <section class="card">
+      <h2>4. min-height: 0 in Column Flexbox</h2>
+
+      <p>
+        The same idea can happen vertically. If a flex column has tall
+        content, the body might not shrink unless we add
+        <code>min-height: 0</code>.
+      </p>
+
+      <div class="panel">
+        <div class="panel-header">Panel Header</div>
+        <div class="panel-body">
+          <p>This area scrolls instead of making the whole panel taller.</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+          <p>Integer posuere erat a ante venenatis dapibus.</p>
+          <p>Donec ullamcorper nulla non metus auctor fringilla.</p>
+          <p>More content...</p>
+          <p>More content...</p>
+          <p>More content...</p>
+        </div>
+      </div>
+
+<pre>.panel {
+  display: flex;
+  flex-direction: column;
+  height: 400px;
+}
+
+.panel-header {
+  flex: 0 0 auto;
+}
+
+.panel-body {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
+}</pre>
+    </section>
+
+    <section class="card">
+    <h2>5. Grid Can Also Need min-width: 0</h2>
+
+    <p>
+        In the first grid, the long text forces the second column wider.
+        In the second grid, <code>min-width: 0</code> lets the grid item shrink. The reason we do not see the full text is because I added overflow hidden and ellipsis, so the extra text gets cut off instead of breaking the layout.
+    </p>
+
+    <div class="comparison">
+        <div class="example bad">
+        <h3>Without min-width: 0</h3>
+
+        <div class="grid-layout grid-broken">
+            <aside class="sidebar">Grid Sidebar</aside>
+            <div class="grid-content">
+            really-long-grid-content-example-that-does-not-break-easily.html
+            </div>
+        </div>
+
+    <pre>.grid-content {
+    white-space: nowrap;
+    }</pre>
+        </div>
+
+        <div class="example good">
+        <h3>With min-width: 0</h3>
+
+        <div class="grid-layout grid-fixed">
+            <aside class="sidebar">Grid Sidebar</aside>
+            <div class="grid-content">
+            really-long-grid-content-example-that-does-not-break-easily.html
+            </div>
+        </div>
+
+    <pre>.grid-content {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    }</pre>
+        </div>
+    </div>
+    </section>
+
+    <section class="card">
+      <h2>6. box-sizing: content-box Problem</h2>
+
+      <p>
+        By default, CSS uses <code>content-box</code>. This means padding
+        and border get added on top of the width.
+      </p>
+
+      <div class="comparison">
+        <div class="example bad">
+          <h3>content-box</h3>
+          <div class="box content-box">344px total</div>
+
+<pre>.box {
+  box-sizing: content-box;
+  width: 300px;
+  padding: 20px;
+  border: 2px solid;
+}</pre>
+        </div>
+
+        <div class="example good">
+          <h3>border-box</h3>
+          <div class="box border-box">300px total</div>
+
+<pre>.box {
+  box-sizing: border-box;
+  width: 300px;
+  padding: 20px;
+  border: 2px solid;
+}</pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>7. The Universal Reset</h2>
+
+      <p>
+        Most projects use this reset so width is easier to control.
+      </p>
+
+<pre>*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}</pre>
+    </section>
+
+    <section class="card">
+      <h2>8. Inheritance Version</h2>
+
+      <p>
+        Some developers use this version because it is easier to override
+        for special components.
+      </p>
+
+<pre>html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}</pre>
+    </section>
+
+
+  </main>
+
+  <footer>
+    Built for a WDD 331R min-width and box-sizing teaching demo.
+  </footer>
+
+</body>
+</html>

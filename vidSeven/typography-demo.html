@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Variable Font Axes Demo</title>
+
+  <link rel="stylesheet" href="typography-demo.css" />
+</head>
+
+<body>
+
+  <header>
+    <h1>Variable Font Axes Demo</h1>
+    <p>
+      A teaching demo for explaining how one variable font file can control
+      weight, width, slant, custom axes, animation, and performance.
+    </p>
+  </header>
+
+  <main>
+
+    <section class="card">
+      <h2>1. Static Fonts vs Variable Fonts</h2>
+
+      <div class="comparison">
+        <div class="bad card">
+          <span class="label">❌ Static Font Files</span>
+
+<pre>regular.woff2
+bold.woff2
+italic.woff2
+bold-italic.woff2</pre>
+
+          <p>
+            Static fonts usually need a separate file for each weight or style.
+          </p>
+        </div>
+
+        <div class="good card">
+          <span class="label">✅ Variable Font File</span>
+
+<pre>recursive-variable.woff2</pre>
+
+          <p>
+            One variable font file can create many weights and styles.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>2. Loading a Variable Font</h2>
+
+<pre>@font-face {
+  font-family: 'Recursive';
+  src: url('/fonts/recursive-variable.woff2')
+       format('woff2-variations');
+  font-weight: 300 1000;
+  font-style: normal;
+  font-display: swap;
+}</pre>
+
+      <p>
+        The important part is <code>font-weight: 300 1000;</code>.
+        This means the font can use any weight between 300 and 1000.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>3. Weight Axis</h2>
+
+      <p>
+        The weight axis controls how thick or thin the letters are.
+      </p>
+
+<pre>.light {
+  font-weight: 300;
+}
+
+.bold {
+  font-weight: 900;
+}</pre>
+
+      <div class="axis-examples">
+        <div class="weight-light">Light Weight 300</div>
+        <div class="weight-normal">Normal Weight 500</div>
+        <div class="weight-bold">Bold Weight 900</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>4. Width Axis</h2>
+
+      <p>
+        The width axis changes how narrow or wide the letters are.
+      </p>
+
+<pre>.condensed {
+  font-stretch: 75%;
+}
+
+.wide {
+  font-stretch: 125%;
+}</pre>
+
+        <div class="axis-examples">
+            <div class="width-small">Width 75%</div>
+            <div class="width-normal">Width 100%</div>
+            <div class="width-large">Width 125%</div>
+        </div>
+    </section>
+
+    <section class="card">
+      <h2>5. Slant and Italic</h2>
+
+      <p>
+        Slant tilts the letters. Italic uses a true italic style when the font has one.
+      </p>
+
+<pre>.slanted {
+  font-style: oblique 10deg;
+}
+
+.italic {
+  font-style: italic;
+}</pre>
+
+      <div class="axis-examples">
+        <div class="slanted">Slanted Text</div>
+        <div class="italic">Italic Text</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>6. Custom Axes</h2>
+
+      <p>
+        Some variable fonts have custom axes. These use
+        <code>font-variation-settings</code>.
+      </p>
+
+<pre>.casual-mono {
+  font-variation-settings:
+    'MONO' 1,
+    'CASL' 0.8;
+}</pre>
+
+      <div class="custom-axis-demo">
+        Custom axes depend on the font you choose.
+      </div>
+
+      <div class="live-demo">
+        <strong>Important:</strong>
+        Use normal CSS properties like <code>font-weight</code> when possible.
+        Use <code>font-variation-settings</code> for custom axes.
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>7. Animating an Axis</h2>
+
+      <p>
+        Axis values are numbers, so they can be animated.
+        Hover over the text below.
+      </p>
+
+<pre>.animated-heading {
+  font-weight: 400;
+  transition: font-weight 0.3s ease;
+}
+
+.animated-heading:hover {
+  font-weight: 900;
+}</pre>
+
+      <div class="animated-heading">
+        Hover to change my weight
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>8. Performance Tradeoff</h2>
+
+      <div class="comparison">
+        <div class="bad card">
+          <h3>Only 2 Weights</h3>
+
+<pre>regular.woff2
+bold.woff2</pre>
+
+          <p>
+            If you only need two weights, static font files might be smaller.
+          </p>
+        </div>
+
+        <div class="good card">
+          <h3>Many Weights</h3>
+
+<pre>variable-font.woff2</pre>
+
+          <p>
+            If you need several weights, one variable font can be better.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>9. Teaching Checklist</h2>
+
+      <ol>
+        <li>Show how one variable file replaces many static files.</li>
+        <li>Explain the <code>@font-face</code> variable font syntax.</li>
+        <li>Show weight, width, slant, and italic examples.</li>
+        <li>Explain custom axes and <code>font-variation-settings</code>.</li>
+        <li>Hover over the animated example.</li>
+        <li>Explain when variable fonts are worth using.</li>
+      </ol>
+    </section>
+
+  </main>
+
+  <footer>
+    Built for a WDD 331R Variable Font Axes teaching demo.
+  </footer>
+
+</body>
+</html>

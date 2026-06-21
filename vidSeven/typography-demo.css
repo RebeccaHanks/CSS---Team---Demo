@@ -1,0 +1,183 @@
+:root {
+  --bg: #f8fafc;
+  --card: #ffffff;
+  --text: #0f172a;
+  --muted: #64748b;
+  --blue: #2563eb;
+  --green: #059669;
+  --purple: #7c3aed;
+  --orange: #ea580c;
+  --shadow: 0 10px 30px rgb(15 23 42 / 0.08);
+  --radius: 16px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+header {
+  background: linear-gradient(135deg, #dbeafe, #ede9fe);
+  padding: 4rem 1.5rem;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 4rem);
+}
+
+header p {
+  max-width: 700px;
+  margin: 1rem auto 0;
+  color: var(--muted);
+  font-size: 1.1rem;
+}
+
+main {
+  width: min(1100px, 92%);
+  margin: 2rem auto 5rem;
+}
+
+.card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow);
+}
+
+h2 {
+  margin-top: 0;
+  color: var(--blue);
+}
+
+code {
+  background: #e2e8f0;
+  padding: 0.15rem 0.4rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+}
+
+pre {
+  background: #0f172a;
+  color: #f8fafc;
+  padding: 1rem;
+  overflow-x: auto;
+  border-radius: 12px;
+}
+
+.comparison {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.bad {
+  border-top: 6px solid var(--orange);
+}
+
+.good {
+  border-top: 6px solid var(--green);
+}
+
+.label {
+  font-weight: bold;
+  margin-bottom: 1rem;
+  display: inline-block;
+}
+
+.axis-examples {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.axis-examples div,
+.custom-axis-demo,
+.animated-heading {
+  background: #f1f5f9;
+  padding: 1.5rem;
+  border-radius: 12px;
+  font-size: 2rem;
+}
+
+.weight-light {
+  font-weight: 300;
+}
+
+.weight-normal {
+  font-weight: 500;
+}
+
+.weight-bold {
+  font-weight: 900;
+}
+
+.width-small {
+  font-stretch: 75%;
+}
+
+.width-normal {
+  font-stretch: 100%;
+}
+
+.width-large {
+  font-stretch: 125%;
+}
+
+.slanted {
+  font-style: oblique 10deg;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.custom-axis-demo {
+  border-left: 6px solid var(--purple);
+  font-variation-settings: "MONO" 1, "CASL" 0.8;
+}
+
+.animated-heading {
+  font-weight: 400;
+  transition: font-weight 0.3s ease;
+  cursor: pointer;
+}
+
+.animated-heading:hover {
+  font-weight: 900;
+}
+
+.live-demo {
+  background: #ede9fe;
+  border-left: 6px solid var(--purple);
+  padding: 1rem;
+  border-radius: 12px;
+  margin-top: 1rem;
+}
+
+footer {
+  text-align: center;
+  color: var(--muted);
+  padding: 2rem 1rem;
+}
+
+@media (min-width: 48em) {
+  .axis-examples {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animated-heading {
+    transition: none;
+  }
+}
