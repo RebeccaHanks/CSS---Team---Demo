@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Form Control Styling Demo</title>
+
+  <link rel="stylesheet" href="form-controls-demo.css" />
+</head>
+
+<body>
+
+  <header>
+    <h1>Form Control Styling Demo</h1>
+    <p>
+      A teaching demo for showing how to style form controls while still keeping
+      them usable and accessible.
+    </p>
+  </header>
+
+  <main>
+
+    <section class="card">
+      <h2>1. Native Controls vs Custom Controls</h2>
+
+      <div class="comparison">
+        <div class="good box">
+          <span class="label">✅ Native First</span>
+
+<pre>input {
+  accent-color: var(--blue);
+}</pre>
+
+          <p>
+            Native controls are easier because the browser already handles a lot
+            of the accessibility.
+          </p>
+        </div>
+
+        <div class="bad box">
+          <span class="label">⚠️ Custom From Scratch</span>
+
+<pre>input[type="checkbox"] {
+  appearance: none;
+}</pre>
+
+          <p>
+            When you remove the native style, you have to rebuild the whole
+            control yourself.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>2. Basic Form Markup</h2>
+
+      <p>
+        Every input should have a label. The <code>for</code> and
+        <code>id</code> should match.
+      </p>
+
+<pre>&lt;label for="name"&gt;Name&lt;/label&gt;
+&lt;input type="text" id="name" name="name" /&gt;</pre>
+
+      <form class="demo-form">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" placeholder="Rebecca Hanks" />
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="name@example.com" />
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>3. Custom Select Arrow</h2>
+
+      <p>
+        You can style the select box, but not the dropdown menu. This example
+        removes the browser arrow and adds a custom one.
+      </p>
+
+<pre>select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,...");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-inline-end: 2.5rem;
+}</pre>
+
+      <form class="demo-form">
+        <label for="topic">Choose a topic</label>
+        <select id="topic" name="topic">
+          <option>Form Styling</option>
+          <option>Accessibility</option>
+          <option>CSS Tokens</option>
+          <option>Focus States</option>
+        </select>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>4. Caret Color</h2>
+
+      <p>
+        The caret is the blinking cursor inside a text box. We can make it match
+        our theme color.
+      </p>
+
+<pre>input,
+textarea {
+  caret-color: var(--blue);
+}</pre>
+
+      <form class="demo-form">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="4" placeholder="Type here to see the caret color..."></textarea>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>5. One Focus Style</h2>
+
+      <p>
+        Different browsers show different focus rings. This makes all form
+        controls use one matching focus style.
+      </p>
+
+<pre>input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
+}</pre>
+
+      <form class="demo-form">
+        <label for="website">Website</label>
+        <input type="url" id="website" name="website" placeholder="https://example.com" />
+
+        <label for="level">Comfort level</label>
+        <input type="range" id="level" name="level" min="1" max="10" />
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>6. Styled Range Slider</h2>
+
+      <p>
+        Range sliders need special CSS because Chrome/Safari and Firefox use
+        different pseudo-elements.
+      </p>
+
+<pre>input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  background: var(--blue);
+  border-radius: 50%;
+}</pre>
+
+      <form class="demo-form">
+        <label for="rating">Rating</label>
+        <input type="range" id="rating" name="rating" min="1" max="100" />
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>7. Full Demo Form</h2>
+
+      <p>
+        This form uses labels, a custom select arrow, caret color, a styled
+        range input, and one shared focus style.
+      </p>
+
+      <form class="demo-form full-form">
+        <label for="full-name">Full Name</label>
+        <input type="text" id="full-name" name="full-name" placeholder="Your name" />
+
+        <label for="full-email">Email</label>
+        <input type="email" id="full-email" name="full-email" placeholder="your@email.com" />
+
+        <label for="reason">Reason for Contact</label>
+        <select id="reason" name="reason">
+          <option>Question</option>
+          <option>Feedback</option>
+          <option>Project Help</option>
+        </select>
+
+        <label for="confidence">Confidence Level</label>
+        <input type="range" id="confidence" name="confidence" min="1" max="10" />
+
+        <label for="comments">Comments</label>
+        <textarea id="comments" name="comments" rows="5" placeholder="Write your message..."></textarea>
+
+        <button type="button">Submit Demo</button>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>8. Teaching Checklist</h2>
+
+      <ol>
+        <li>Explain why native form controls are usually the best starting point.</li>
+        <li>Show what <code>appearance: none</code> does.</li>
+        <li>Explain why custom controls need extra accessibility work.</li>
+        <li>Show the custom select arrow.</li>
+        <li>Show the caret color inside a text input.</li>
+        <li>Tab through the form to show the shared focus ring.</li>
+        <li>Explain why range sliders need browser-specific CSS.</li>
+      </ol>
+    </section>
+
+  </main>
+
+  <footer>
+    Built for a WDD 331R Form Control Styling teaching demo.
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>View Transitions API Demo</title>
+
+  <link rel="stylesheet" href="view-transitions.css" />
+  <script src="view-transitions.js" defer></script>
+</head>
+
+<body>
+  <header>
+    <h1>View Transitions API Demo</h1>
+    <p>
+      A simple teaching demo for showing how page changes can fade or morph
+      instead of instantly jumping.
+    </p>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>1. What the API Does</h2>
+      <p>
+        The View Transitions API takes a snapshot before the page changes,
+        updates the DOM, takes another snapshot, and then animates between them.
+      </p>
+
+<pre>/* ::view-transition pseudo-element tree */
+::view-transition
+└── ::view-transition-group(root)
+    └── ::view-transition-image-pair(root)
+        ├── ::view-transition-old(root)
+        └── ::view-transition-new(root)</pre>
+    </section>
+
+    <section class="card">
+      <h2>2. Without View Transitions</h2>
+      <p>
+        Without the API, the list view hides and the detail view appears right away.
+      </p>
+
+<pre>// Without view transitions: instant swap
+function showDetail(id) {
+    document.querySelector('.list-view').hidden = true;
+    document.querySelector('.detail-view').hidden = false;
+}</pre>
+
+    <button class="button secondary" id="instant-demo-button">
+    Show Instant Swap Example
+    </button>
+    </section>
+
+    <section class="card">
+      <h2>3. With View Transitions</h2>
+      <p>
+        With <code>document.startViewTransition()</code>, the same DOM change becomes animated.
+      </p>
+
+<pre>// With view transitions: animated crossfade
+function showDetail(id) {
+    document.startViewTransition(() => {
+        document.querySelector('.list-view').hidden = true;
+        document.querySelector('.detail-view').hidden = false;
+    });
+}</pre>
+    </section>
+
+    <section class="card">
+      <h2>4. Feature Detection</h2>
+      <p>
+        Always check if the browser supports it. If not, just run the normal update.
+      </p>
+
+<pre>function showDetail(id) {
+    const update = () => {
+        document.querySelector('.list-view').hidden = true;
+        document.querySelector('.detail-view').hidden = false;
+    };
+
+    if (document.startViewTransition) {
+        document.startViewTransition(update);
+    } else {
+        update();
+    }
+}</pre>
+
+      <p class="support-message" id="support-message"></p>
+    </section>
+
+    <section class="card">
+      <h2>5. Named Elements and the Morph Effect</h2>
+      <p>
+        A <code>view-transition-name</code> lets one element morph into another element.
+        In this demo, a small card turns into the detail panel.
+      </p>
+
+<pre>/* Name the card in the list view */
+.card.is-selected {
+    view-transition-name: active-card;
+}
+
+/* Name the matching container in the detail view */
+.detail-header {
+    view-transition-name: active-card;
+}</pre>
+
+<pre>function showDetail(cardEl) {
+    // Apply the name just before the transition starts
+    cardEl.style.viewTransitionName = 'active-card';
+
+    document.startViewTransition(() => {
+        // Swap the views
+        cardEl.closest('.list-view').hidden = true;
+        document.querySelector('.detail-view').hidden = false;
+
+        // Clear the name after DOM update so it doesn't persist
+        cardEl.style.viewTransitionName = '';
+    });
+}</pre>
+    </section>
+
+    <section class="card demo-area">
+      <h2>6. Click a Project Card</h2>
+      <p>
+        Click one card below. It will morph into the detail view. Use the back
+        button to return to the list.
+      </p>
+
+      <div class="controls">
+        <label>
+          <input type="checkbox" id="slow-motion" />
+          Slow Motion
+        </label>
+      </div>
+
+      <div class="list-view">
+        <button class="project-card" data-title="Portfolio Homepage" data-description="This project shows a clean homepage layout with cards, spacing, and responsive design.">
+          <span class="project-icon">🏠</span>
+          <strong>Portfolio Homepage</strong>
+          <span>Click to open details</span>
+        </button>
+
+        <button class="project-card" data-title="Workout Tracker" data-description="This project tracks workouts, goals, and progress using a simple dashboard layout.">
+          <span class="project-icon">💪</span>
+          <strong>Workout Tracker</strong>
+          <span>Click to open details</span>
+        </button>
+
+        <button class="project-card" data-title="CSS Demo Page" data-description="This project teaches a CSS topic with examples, code blocks, and a live demo section.">
+          <span class="project-icon">🎨</span>
+          <strong>CSS Demo Page</strong>
+          <span>Click to open details</span>
+        </button>
+      </div>
+
+      <div class="detail-view" hidden>
+        <div class="detail-header">
+          <span class="detail-icon" id="detail-icon">✨</span>
+          <div>
+            <h3 id="detail-title">Project Title</h3>
+            <p id="detail-description">Project description goes here.</p>
+          </div>
+        </div>
+
+        <button class="button" id="back-button">Back to Cards</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>7. Custom Animation CSS</h2>
+      <p>
+        You can change the default fade by styling the view transition pseudo-elements.
+      </p>
+
+<pre>/* Override the default crossfade for the root */
+::view-transition-old(root) {
+    animation: 200ms ease-in both fade-out;
+}
+
+::view-transition-new(root) {
+    animation: 300ms ease-out both fade-in;
+}
+
+/* Custom slide for a named element */
+::view-transition-old(active-card) {
+    animation: 300ms ease-in both slide-out-left;
+}
+
+::view-transition-new(active-card) {
+    animation: 300ms ease-out both slide-in-right;
+}
+
+@keyframes fade-out {
+    to { opacity: 0; }
+}
+
+@keyframes fade-in {
+    from { opacity: 0; }
+}</pre>
+    </section>
+
+    <section class="card">
+      <h2>8. Cross-Document Transitions</h2>
+      <p>
+        For separate HTML pages, add this to both pages. Chrome and Edge support
+        this, but other browsers may just navigate normally.
+      </p>
+
+<pre>/* Add to both pages that should animate between each other */
+@view-transition {
+    navigation: auto;
+}</pre>
+    </section>
+
+    <section class="card">
+      <h2>9. Reduced Motion</h2>
+      <p>
+        Some users prefer less animation, so we should make the transition almost instant.
+      </p>
+
+<pre>@media (prefers-reduced-motion: reduce) {
+    ::view-transition-group(*),
+    ::view-transition-old(*),
+    ::view-transition-new(*) {
+        animation-duration: 0.01ms !important;
+    }
+}</pre>
+    </section>
+
+    <section class="card">
+      <h2>10. Teaching Checklist</h2>
+      <ol>
+        <li>Explain that the browser takes before and after snapshots.</li>
+        <li>Show the instant swap first.</li>
+        <li>Show the same swap wrapped in <code>startViewTransition()</code>.</li>
+        <li>Explain why feature detection is needed.</li>
+        <li>Click a card and show the morph effect.</li>
+        <li>Explain that <code>view-transition-name</code> must be unique.</li>
+        <li>Show the reduced motion CSS.</li>
+      </ol>
+    </section>
+  </main>
+
+  <footer>
+    Built for a WDD 331R View Transitions API teaching demo.
+  </footer>
+</body>
+</html>

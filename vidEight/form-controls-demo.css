@@ -1,0 +1,243 @@
+:root {
+  --bg: #f8fafc;
+  --card: #ffffff;
+  --text: #0f172a;
+  --muted: #64748b;
+  --blue: #2563eb;
+  --green: #059669;
+  --orange: #ea580c;
+  --border: #cbd5e1;
+  --border-strong: #94a3b8;
+  --input-bg: #ffffff;
+  --shadow: 0 10px 30px rgb(15 23 42 / 0.08);
+  --radius: 16px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+header {
+  background: linear-gradient(135deg, #dbeafe, #dcfce7);
+  padding: 4rem 1.5rem;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 4rem);
+}
+
+header p {
+  max-width: 700px;
+  margin: 1rem auto 0;
+  color: var(--muted);
+  font-size: 1.1rem;
+}
+
+main {
+  width: min(1100px, 92%);
+  margin: 2rem auto 5rem;
+}
+
+.card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow);
+}
+
+h2 {
+  margin-top: 0;
+  color: var(--blue);
+}
+
+code {
+  background: #e2e8f0;
+  padding: 0.15rem 0.4rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+}
+
+pre {
+  background: #0f172a;
+  color: #f8fafc;
+  padding: 1rem;
+  overflow-x: auto;
+  border-radius: 12px;
+}
+
+.comparison {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.box {
+  padding: 1.5rem;
+  border-radius: 12px;
+  background: #f1f5f9;
+}
+
+.good {
+  border-top: 6px solid var(--green);
+}
+
+.bad {
+  border-top: 6px solid var(--orange);
+}
+
+.label {
+  font-weight: bold;
+  margin-bottom: 1rem;
+  display: inline-block;
+}
+
+.demo-form {
+  display: grid;
+  gap: 0.75rem;
+  max-width: 600px;
+  margin-top: 1rem;
+}
+
+label {
+  font-weight: bold;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  font: inherit;
+  color: var(--text);
+  background-color: var(--input-bg);
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  padding: 0.8rem 1rem;
+  caret-color: var(--blue);
+}
+
+textarea {
+  resize: vertical;
+}
+
+select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24'%3E%3Cpath fill='%23666' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1rem;
+  padding-inline-end: 2.5rem;
+}
+
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
+}
+
+input[type="range"] {
+  appearance: none;
+  height: 4px;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  border: none;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  background: var(--border-strong);
+  border-radius: 999px;
+  height: 4px;
+}
+
+input[type="range"]::-moz-range-track {
+  background: var(--border-strong);
+  border-radius: 999px;
+  height: 4px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  background: var(--blue);
+  border: none;
+  border-radius: 50%;
+  height: 1rem;
+  width: 1rem;
+  margin-block-start: -6px;
+}
+
+input[type="range"]::-moz-range-thumb {
+  background: var(--blue);
+  border: none;
+  border-radius: 50%;
+  height: 1rem;
+  width: 1rem;
+}
+
+input[type="range"]:focus-visible {
+  outline: none;
+}
+
+input[type="range"]:focus-visible::-webkit-slider-thumb {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
+}
+
+input[type="range"]:focus-visible::-moz-range-thumb {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
+}
+
+button {
+  width: fit-content;
+  border: none;
+  border-radius: 10px;
+  background: var(--blue);
+  color: white;
+  padding: 0.8rem 1.25rem;
+  font: inherit;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+.full-form {
+  background: #f1f5f9;
+  padding: 1.5rem;
+  border-radius: 12px;
+}
+
+footer {
+  text-align: center;
+  color: var(--muted);
+  padding: 2rem 1rem;
+}
+
+@media (min-width: 48em) {
+  .full-form {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .full-form label,
+  .full-form input,
+  .full-form select,
+  .full-form textarea,
+  .full-form button {
+    grid-column: span 2;
+  }
+}
