@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Pure CSS Icons Demo Page</title>
+
+  <link rel="stylesheet" href="css-icons.css" />
+</head>
+
+<body>
+  <header>
+    <h1>Pure CSS Icons Demo Page</h1>
+
+    <p>
+      Learn how to build simple icons with CSS borders,
+      pseudo-elements, transforms, and currentColor.
+    </p>
+  </header>
+
+  <main>
+
+    <section class="card">
+      <h2>1. What Are Pure CSS Icons?</h2>
+
+      <p>
+        Pure CSS icons are shapes created without images or SVG files.
+        They are made with CSS properties like borders, transforms,
+        border-radius, and pseudo-elements.
+      </p>
+
+      <div class="live-demo">
+        <strong>Simple idea:</strong>
+        One HTML element can become an icon by styling it with CSS.
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>2. Border Triangle</h2>
+
+      <p>
+        A triangle can be made from borders. The element has no width or
+        height, so the borders become the visible shape.
+      </p>
+
+      <div class="icon-demo">
+        <span class="triangle-down" aria-hidden="true"></span>
+        <span>Down Arrow</span>
+      </div>
+
+<pre><code>&lt;span class="triangle-down"&gt;&lt;/span&gt;</code></pre>
+
+<pre><code>.triangle-down {
+  width: 0;
+  height: 0;
+
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 16px solid currentColor;
+}</code></pre>
+
+      <div class="live-demo">
+        The left and right borders are transparent. The top border creates
+        the visible triangle.
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>3. Seeing All Four Borders</h2>
+
+      <p>
+        Before making three borders transparent, it helps to show all four
+        border colors. This makes it easier to understand how the triangle
+        technique works.
+      </p>
+
+      <div class="icon-demo">
+        <span class="full-border-shape" aria-hidden="true"></span>
+      </div>
+
+<pre><code>.full-border-shape {
+  width: 0;
+  height: 0;
+
+  border-top: 30px solid blue;
+  border-right: 30px solid green;
+  border-bottom: 30px solid purple;
+  border-left: 30px solid orange;
+}</code></pre>
+
+      <p>
+        Each border creates one triangle. Making three sides transparent
+        leaves only one visible triangle.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>4. Rotated Border Chevron</h2>
+
+      <p>
+        A chevron can be made from two borders on a small square.
+        Rotating the square makes the shape point in a direction.
+      </p>
+
+      <div class="icon-demo">
+        <span class="chevron-right" aria-hidden="true"></span>
+        <span>Continue</span>
+      </div>
+
+<pre><code>&lt;span class="chevron-right"&gt;&lt;/span&gt;</code></pre>
+
+<pre><code>.chevron-right {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+
+  border-top: 3px solid currentColor;
+  border-right: 3px solid currentColor;
+
+  transform: rotate(45deg);
+}</code></pre>
+
+      <div class="live-demo">
+        The borders create an L shape. Rotating it 45 degrees makes it
+        look like a right-pointing chevron.
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>5. Plus Icon with Pseudo-Elements</h2>
+
+      <p>
+        The <code>::before</code> and <code>::after</code> pseudo-elements
+        give one HTML element two extra parts.
+      </p>
+
+      <button class="add-button" type="button">
+        <span class="plus-icon" aria-hidden="true"></span>
+        Add Item
+      </button>
+
+<pre><code>&lt;button class="add-button"&gt;
+  &lt;span class="plus-icon"&gt;&lt;/span&gt;
+  Add Item
+&lt;/button&gt;</code></pre>
+
+<pre><code>.plus-icon {
+  position: relative;
+  width: 18px;
+  height: 18px;
+}
+
+.plus-icon::before,
+.plus-icon::after {
+  content: "";
+  position: absolute;
+  background: currentColor;
+}
+
+.plus-icon::before {
+  width: 18px;
+  height: 3px;
+  top: 7.5px;
+  left: 0;
+}
+
+.plus-icon::after {
+  width: 3px;
+  height: 18px;
+  top: 0;
+  left: 7.5px;
+}</code></pre>
+
+      <div class="live-demo">
+        <code>::before</code> creates the horizontal line and
+        <code>::after</code> creates the vertical line.
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>6. Basic Hamburger Icon</h2>
+
+      <p>
+        A hamburger icon uses the main element as the middle line.
+        The two pseudo-elements create the top and bottom lines.
+      </p>
+
+      <div class="icon-demo">
+        <span class="hamburger basic-hamburger" aria-hidden="true"></span>
+      </div>
+
+<pre><code>&lt;span class="hamburger"&gt;&lt;/span&gt;</code></pre>
+
+<pre><code>.hamburger,
+.hamburger::before,
+.hamburger::after {
+  display: block;
+  width: 24px;
+  height: 3px;
+  background: currentColor;
+  border-radius: 2px;
+}
+
+.hamburger {
+  position: relative;
+}
+
+.hamburger::before,
+.hamburger::after {
+  content: "";
+  position: absolute;
+  left: 0;
+}
+
+.hamburger::before {
+  top: -8px;
+}
+
+.hamburger::after {
+  top: 8px;
+}</code></pre>
+
+      <p>
+        The main element needs <code>position: relative</code> so the
+        pseudo-elements can be positioned around it.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>7. Hamburger-to-Close Morph</h2>
+
+      <p>
+        Click the button below. The middle line disappears, while the
+        top and bottom lines move to the center and rotate into an X.
+      </p>
+
+      <button
+        class="menu-button"
+        id="menu-button"
+        type="button"
+        aria-expanded="false"
+        aria-controls="demo-menu"
+      >
+        <span class="hamburger" aria-hidden="true"></span>
+        <span class="button-text">Open Menu</span>
+      </button>
+
+      <nav class="demo-menu" id="demo-menu" hidden>
+        <a href="#">Home</a>
+        <a href="#">Projects</a>
+        <a href="#">Contact</a>
+      </nav>
+
+<pre><code>&lt;button
+  class="menu-button"
+  aria-expanded="false"
+&gt;
+  &lt;span class="hamburger"&gt;&lt;/span&gt;
+  &lt;span class="button-text"&gt;Open Menu&lt;/span&gt;
+&lt;/button&gt;</code></pre>
+
+<pre><code>.hamburger,
+.hamburger::before,
+.hamburger::after {
+  transition:
+    top 300ms ease-in-out,
+    transform 300ms ease-in-out,
+    background 200ms ease-in-out;
+}
+
+.hamburger.is-open {
+  background: transparent;
+}
+
+.hamburger.is-open::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+
+.hamburger.is-open::after {
+  top: 0;
+  transform: rotate(-45deg);
+}</code></pre>
+
+<pre><code>const menuButton = document.querySelector("#menu-button");
+const hamburger = document.querySelector(".menu-button .hamburger");
+const buttonText = document.querySelector(".button-text");
+const demoMenu = document.querySelector("#demo-menu");
+
+menuButton.addEventListener("click", () =&gt; {
+  const isOpen =
+    menuButton.getAttribute("aria-expanded") === "true";
+
+  menuButton.setAttribute(
+    "aria-expanded",
+    String(!isOpen)
+  );
+
+  hamburger.classList.toggle("is-open");
+  demoMenu.hidden = isOpen;
+
+  buttonText.textContent =
+    isOpen ? "Open Menu" : "Close Menu";
+});</code></pre>
+    </section>
+
+    <section class="card">
+      <h2>8. Using currentColor</h2>
+
+      <p>
+        The value <code>currentColor</code> tells the icon to use the same
+        color as its parent element.
+      </p>
+
+      <div class="color-examples">
+        <div class="blue-example">
+          <span class="chevron-right" aria-hidden="true"></span>
+          Blue
+        </div>
+
+        <div class="green-example">
+          <span class="chevron-right" aria-hidden="true"></span>
+          Green
+        </div>
+
+        <div class="purple-example">
+          <span class="chevron-right" aria-hidden="true"></span>
+          Purple
+        </div>
+      </div>
+
+<pre><code>.chevron-right {
+  border-top: 3px solid currentColor;
+  border-right: 3px solid currentColor;
+}
+
+.blue-example {
+  color: #2563eb;
+}
+
+.green-example {
+  color: #059669;
+}
+
+.purple-example {
+  color: #7c3aed;
+}</code></pre>
+
+      <div class="live-demo">
+        The icon CSS stays the same. Only the parent text color changes.
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>9. Reduced Motion</h2>
+
+      <p>
+        Some users prefer less animation. A reduced-motion media query
+        removes the transition while allowing the icon to still change.
+      </p>
+
+<pre><code>@media (prefers-reduced-motion: reduce) {
+  .hamburger,
+  .hamburger::before,
+  .hamburger::after {
+    transition: none;
+  }
+}</code></pre>
+
+      <div class="live-demo">
+        The menu still opens and closes, but the icon changes instantly.
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>10. Accessibility</h2>
+
+      <p>
+        A CSS icon does not have its own accessible name. An icon-only button
+        needs an <code>aria-label</code> or visually hidden text.
+      </p>
+
+      <button
+        class="icon-only-button"
+        type="button"
+        aria-label="Add new item"
+      >
+        <span class="plus-icon" aria-hidden="true"></span>
+      </button>
+
+<pre><code>&lt;button aria-label="Add new item"&gt;
+  &lt;span
+    class="plus-icon"
+    aria-hidden="true"
+  &gt;&lt;/span&gt;
+&lt;/button&gt;</code></pre>
+
+      <p>
+        The button receives the label. The decorative icon is hidden from
+        screen readers with <code>aria-hidden="true"</code>.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>11. CSS Icons vs. SVG Icons</h2>
+
+      <div class="comparison">
+        <div class="choice">
+          <h3>Use CSS Icons</h3>
+
+          <ul>
+            <li>Simple arrows and triangles</li>
+            <li>Hamburger and close icons</li>
+            <li>Small shapes used in one place</li>
+            <li>Simple morph animations</li>
+          </ul>
+        </div>
+
+        <div class="choice">
+          <h3>Use SVG Icons</h3>
+
+          <ul>
+            <li>Detailed or custom shapes</li>
+            <li>Logos and illustrations</li>
+            <li>Large icon sets</li>
+            <li>Icons reused across many pages</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="live-demo">
+        <strong>Rule of thumb:</strong>
+        Use CSS for simple geometric shapes and SVG for detailed or reusable
+        icons.
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>12. Final Teaching Checklist</h2>
+
+      <ol>
+        <li>Explain how four borders create four triangles.</li>
+        <li>Make three borders transparent to create one triangle.</li>
+        <li>Show how rotated borders create a chevron.</li>
+        <li>Explain how <code>::before</code> and <code>::after</code> add extra parts.</li>
+        <li>Build the hamburger icon from one blank element.</li>
+        <li>Show how the hamburger changes into an X.</li>
+        <li>Explain how <code>currentColor</code> lets icons inherit color.</li>
+        <li>Show the reduced-motion media query.</li>
+        <li>Explain when CSS icons are better than SVG icons.</li>
+      </ol>
+    </section>
+
+  </main>
+
+  <footer>
+    Built for a WDD 331R Pure CSS Icons teaching demo.
+  </footer>
+
+  <script>
+    const menuButton = document.querySelector("#menu-button");
+    const hamburger = document.querySelector(".menu-button .hamburger");
+    const buttonText = document.querySelector(".button-text");
+    const demoMenu = document.querySelector("#demo-menu");
+
+    menuButton.addEventListener("click", () => {
+      const isOpen =
+        menuButton.getAttribute("aria-expanded") === "true";
+
+      menuButton.setAttribute(
+        "aria-expanded",
+        String(!isOpen)
+      );
+
+      hamburger.classList.toggle("is-open");
+      demoMenu.hidden = isOpen;
+
+      buttonText.textContent =
+        isOpen ? "Open Menu" : "Close Menu";
+    });
+  </script>
+</body>
+</html>
